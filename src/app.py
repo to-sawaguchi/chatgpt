@@ -1,11 +1,13 @@
 from flask import *
 import requests
+import os
 
 # おまじない
 app = Flask(__name__)
 
 # APIトークンは外部に公開しないこと
-API_KEY = "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"
+# API_KEY = "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"
+API_KEY = os.environ.get('API_KEY')
 
 # チャットGPTに質問する関数
 def query_chatgpt(prompt):
