@@ -9,24 +9,40 @@ app = Flask(__name__)
 API_KEY = os.environ.get('API_KEY')
 
 # チャットGPTに質問する関数
+# def query_chatgpt(prompt):
+#     header = {
+#         "Content-Type" : "application/json",
+#         "Authorization" : f"Bearer {API_KEY}",
+#     }
+
+#     body = '''
+#     {
+#         "model": "gpt-3.5-turbo",
+#         "messages": [
+#             {"role": "user", "content":"''' + prompt + '''"}
+#         ]
+#     }
+#     '''
+#     response = requests.post("https://api.openai.com/v1/chat/completions", headers = header, data = body.encode('utf_8'))
+#     rj = response.json()
+#     # return rj["choices"][0]["message"]["content"]
+#     return rj
+
+
 def query_chatgpt(prompt):
     header = {
-        "Content-Type" : "application/json",
-        "Authorization" : f"Bearer {API_KEY}",
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {API_KEY}",
     }
 
-    body = '''
-    {
+    body = {
         "model": "gpt-3.5-turbo",
         "messages": [
-            {"role": "user", "content":"''' + prompt + '''"}
+            {"role": "user", "content": prompt}
         ]
     }
-    '''
-    response = requests.post("https://api.openai.com/v1/chat/completions", headers = header, data = body.encode('utf_8'))
-    rj = response.json()
-    # return rj["choices"][0]["message"]["content"]
-    return rj
+    response = requests.post("https://api.openai.com/v1/chat/completions", headers=header, json=body)
+    return response.json()
 
 # トップページ（"/"）にGETリクエストが来たら実行される
 @app.route("/", methods=["GET"])
