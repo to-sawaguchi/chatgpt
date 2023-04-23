@@ -6,7 +6,6 @@ import os
 app = Flask(__name__)
 
 # APIトークンは外部に公開しないこと
-# API_KEY = "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"
 API_KEY = os.environ.get('API_KEY')
 
 # チャットGPTに質問する関数
