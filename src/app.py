@@ -25,8 +25,8 @@ def query_chatgpt(prompt):
     '''
     response = requests.post("https://api.openai.com/v1/chat/completions", headers = header, data = body.encode('utf_8'))
     rj = response.json()
-    # return rj["choices"][0]["message"]["content"]
-    return rj
+    return rj["choices"][0]["message"]["content"]
+
 
 
 # def query_chatgpt(prompt):
